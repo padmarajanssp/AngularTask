@@ -1,0 +1,52 @@
+.box
+{
+    height:40em;
+    .title
+    {
+        height:3em;
+        background-color:rgb(232, 245, 247);
+    }
+    select
+    {
+        border:1px solid blue;
+    }
+}
+#qty
+{
+    text-align: center;
+}
+.icon      
+{
+height:inherit;
+}
+.findproduct,.supplier
+{
+    .title
+    {
+        background-color: white;
+    }
+}
+#heading1
+{
+    font-weight:bold;
+}
+.labels
+{
+    color:black;
+}
+.mat-error
+{
+    color:rgb(236, 46, 46);
+}
+
+::-webkit-scrollbar
+{
+    border:none;
+    background: none;
+}
+::-webkit-scrollbar-thumb
+{
+    width:2px;
+    border-radius:8px;
+    background-color: rgba(153, 122, 129, 0.897);
+}

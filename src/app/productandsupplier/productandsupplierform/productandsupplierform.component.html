@@ -1,0 +1,107 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col s12 m12 l12 box mt-2">
+            <!--main Title-->
+            <div class="col s12 m12 l12 title mt-2">
+                <img src="../../../assets/icons/supllies.svg" class="left icon">
+                <p class="left ml-2" id="heading1">PRODUCT & SUPPLIER</p>
+            </div>
+            <!--Find Product-->
+            <form [formGroup]="productform" >
+            <div class="col s12 m12 l12 findproduct mt-1">
+                <div class="col s12 m12 l12 title mt-2">
+                   <img src="../../../assets/icons/product.svg" class="left icon">
+                    <p class="heading left ml-2">FIND PRODUCT</p> 
+                </div>
+                <!--Input Fields of Find Products-->
+                <div class="input-field col s12 m6 l3" >
+                   <p class="labels ml-1">Brand</p>
+                   <mat-label>Select Your Brand</mat-label>
+                   <mat-select  formControlName="brand">
+                       <mat-option *ngFor="let brand of brands" [value]="brand">{{brand}}</mat-option>
+                   </mat-select>
+                   <mat-error  *ngIf="productform.get('brand').errors?.required">Field is mandatory</mat-error>
+                </div>
+                <div class="input-field col s12 m6 l3">
+                    <p class="labels ml-1">Product Name</p>
+                    <input type="text" formControlName="productname">
+                    <mat-error *ngIf="productform.get('productname').errors?.required">Field is mandatory</mat-error>
+                    <mat-error *ngIf="productform.get('productname').errors?.maxlength">Product name mustbe in max of 10 char</mat-error>
+                </div>
+                <div class="input-field col s12 m6 l3">
+                    <p class="labels ml-1">Product Code</p>
+                    <input type="text" formControlName="productcode">
+                    <mat-error  *ngIf="productform.get('productcode').errors?.required">Field is mandatory</mat-error>
+                    <mat-error  *ngIf="productform.get('productcode').errors?.maxlength">Product name mustbe in max of 6 char</mat-error>
+                    <mat-error  *ngIf="productform.get('productcode').errors?.pattern">Product name mustbe alphanumeric</mat-error>
+                </div>
+                <div class="input-field col s12 m6 l3">
+                    <p class="labels ml-1">Color</p>
+                    <input type="text"  matInput  [matAutocomplete]="color"  formControlName="color">
+                    <!--Autocomplete for color-->
+                    <mat-autocomplete #color="matAutocomplete">
+                        <mat-option *ngFor="let color of filteredOptions | async" [value]="color">
+                          {{ color }}
+                        </mat-option>
+                      </mat-autocomplete>
+                    <!---->
+                    <mat-error  *ngIf="productform.get('color').errors?.required">Field is mandatory</mat-error>
+                </div>
+                <div class="input-field col s12 m6 l2">
+                    <p class="labels ml-1">Size</p>
+                    <input type="text"  matInput  [matAutocomplete]="size"   formControlName="size">
+                       <!--Autocomplete for size-->
+                       <mat-autocomplete #size="matAutocomplete">
+                        <mat-option *ngFor="let size of filteredOptions1 | async" [value]="size">
+                          {{ size }}
+                        </mat-option>
+                      </mat-autocomplete>
+                       <!---->
+                    <mat-error  *ngIf="productform.get('size').errors?.required">Field is mandatory</mat-error>
+                </div>
+                <div class="col s9 m4 l2 mt-3">
+                   <p class="labels ml-4">Qty</p>
+                  <div class="input-field">
+                    <i class="material-icons prefix mt-4" (click)="decreaseqty()">remove</i>
+                    <input type="text"  id="qty"  formControlName="Qty">
+                    <mat-error  *ngIf="productform.get('Qty').errors?.required">Field is mandatory</mat-error>
+                    <i class="material-icons prefix mt-4 ml-2" (click)="addqty()">add</i>
+                  </div>
+                </div>
+                <div class="col s9 m4 l3 mt-3">
+                    <p class="labels ml-4">Price</p>
+                <div class="input-field">
+                    <i class="material-icons prefix ml-l-4" style="font-size:26px;">attach_money</i>
+                    <input type="text" formControlName="price">
+                    <mat-error class="ml-5" *ngIf="productform.get('price').errors?.required">Field is mandatory</mat-error>
+                    <mat-error class="ml-5" *ngIf="productform.get('price').errors?.pattern">Price must be in number</mat-error>
+                </div>
+                </div>
+            </div>
+             <!--Supplier-->
+            <div class="col s12 m12 l12 supplier mt-4">
+                <div class="col s12 m12 l12 title mt-2">
+                  <img src="../../../assets/icons/supplier.svg" class="left icon">
+                  <p class="heading left ml-2">SUPPLIER</p>
+                </div>
+                <div class="input-field col s12 m6 l3">
+                    <p class="labels ml-1">Supplier Name</p>
+                    <input type="text" formControlName="suppliername">
+                    <mat-error  *ngIf="productform.get('suppliername').errors?.required">Field is mandatory</mat-error>
+                    <mat-error  *ngIf="productform.get('suppliername').errors?.maxlength">Product name mustbe in max of 20 char</mat-error>
+                </div>
+                <div class="input-field col s12 m6 l3">
+                    <p class="labels ">Expected Completion Date</p>
+                    <input matInput [matDatepicker]="picker" formControlName="expectedcompletion">
+                    <mat-datepicker-toggle class="prefix mt-5" matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error  *ngIf="productform.get('expectedcompletion').errors?.required">Field is mandatory</mat-error>
+                </div>
+                <div class="col s12 m12 l12">
+                <button class="btn blue right">Cancel</button>
+                <button class="btn blue right ml-1" [disabled]="productform.invalid" (click)="showresult()">Save&Continue</button>
+                </div>
+            </div>
+            </form>
+    </div>
+</div>
